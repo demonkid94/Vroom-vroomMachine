@@ -2,6 +2,8 @@ Mirror Dungeon Script v0.2 a.k.a. Vroom-vroom Machine by KhryDL#2396
 
 This script is theoretically capable of automatically clearing all the dungeon up to the last boss (excluded)
 
+MISSING EGO GIFTS:	Ashes to Ashes
+
 
 HOW TO USE:
 
