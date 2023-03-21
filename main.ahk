@@ -180,11 +180,11 @@ debug := false
 			;align dante to center
 			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY > 500 {
 				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 0, - 200, 10, "r"
+				MouseClickDrag "Left", 0, 0, 0, 540 - danteY - 50, 10, "r"
 			}
 			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY < 450 {
 				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 0, 200, 10, "r"
+				MouseClickDrag "Left", 0, 0, 0, 540 - danteY + 50, 10, "r"
 			}
 			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > 1025 {
 				MouseMove danteX, danteY
