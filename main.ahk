@@ -116,7 +116,6 @@ debug := false
 
 			;select ego gift
 			Else if ImageSearch(&X, &Y, 1600, 850, 1820, 885, "*20 *Transblack " A_WorkingDir "\Images\gift.png") {
-				MsgBox "I haven't implemented all ego gifts yet as the way the script is set up requires me to extract the ego gift name from an in game image`nWhat to do: `nIf one of the gifts is:`nIllusory Hunt`ntake a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)`notherwise press enter"
 				selectGift()
 				Sleep 500
 				Click X ,Y
@@ -148,7 +147,7 @@ debug := false
 
 			;abnormality event
 			else if ImageSearch(&X, &Y, 850, 440, 950, 490, "*50 " A_WorkingDir "\Images\skip.png") {
-				MsgBox "I haven't implemented all abnormalities events as the way the script is set up requires me to extract part of the starting abnormality screen from an in game image`nWhat to do: Press enter, if the script recognizes the abnormality press enter again, if if doesn't or it gets stuck for more than 5 seconds take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)"
+				MsgBox "I haven't implemented all abnormalities events as the way the script is set up requires me to extract part of the starting abnormality screen from an in game image`nWhat to do: Press enter, if the script recognizes the abnormality press enter again, if it doesn't or it gets stuck for more than 5 seconds take a screenshot of the entire screen and put it inside a folder (named after the abnormality or the ego gift it rewards) in https://drive.google.com/drive/folders/1-4nZqkWHOtfIhDMdvLGjT2CoMChdGJHU (as a png).`nIn the same folder put a text file that describes teh steps you have to perform in order to complete the event in the best way possible (refer to this https://docs.google.com/spreadsheets/d/14qQvQ-vpMbJYLNHA32VMqgWgvgVRIhq-ceB_SS6Ieao), using a format similar to this: press skip, press first option, press skip, roll dice, press skip, press skip, press continue"
 				event()
 			}
 
@@ -212,7 +211,7 @@ debug := false
 			else if ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*5 *TransBlack " A_WorkingDir "\Images\boss.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*TransBlack " A_WorkingDir "\Images\boss1.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*8 *TransBlack " A_WorkingDir "\Images\boss2.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*11 *TransBlack " A_WorkingDir "\Images\boss3.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*TransBlack " A_WorkingDir "\Images\boss4.png") {
 				MouseMove nodeX, nodeY
 				if bossNow(3) {
-					MsgBox "If the mouse isn't pointing at the boss node of the 3rd floor take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)"
+					MsgBox "If the mouse isn't pointing at the boss node of the 3rd floor take a screenshot of the entire screen, create an issue here https://github.com/KhryDL/Vroom-vroomMachine/issues containing the screenshot (as a png) and a description of the bug (a video is fine too, but the screenshot is required)"
 					break out
 				}
 				bossUp()
@@ -234,7 +233,7 @@ debug := false
 			}
 			;end loop
 			Else {
-				MsgBox "A bug occurred that prevented the script from knowing what to do next`nWhat to do: Reload and start the script, if it gets stuck again take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)"
+				MsgBox "A bug occurred that prevented the script from knowing what to do next`nWhat to do: Reload and start the script, if it gets stuck again take a screenshot of the entire screen, create an issue here https://github.com/KhryDL/Vroom-vroomMachine/issues containing the screenshot (as a png) and a description of the bug (a video is fine too, but the screenshot is required)"
 				Break out
 			}
 			Sleep 500
@@ -465,10 +464,7 @@ startBattle() {
 	ExitApp
 }
 
-+d::{
-	Global
-	debug := !debug
-}
++d::Global debug := !debug
 +r::Reload
 
 #SuspendExempt

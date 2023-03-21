@@ -34,7 +34,7 @@ Loop 38 {
 start := Gui()
 tab1 := start.Add("Tab3",, ["Info","Sinners","EGO Gifts"])
 
-start.Add("Text", "vText1", "Mirror Dungeon Script v0.1 a.k.a. Vroom-vroom Machine by KhryDL#2396`n`nThis script is theoretically capable of automatically clearing all the dungeon up untill the last boss`n`nAutomatic bossfights are currently disabled as they would conflict with the need to reload the script after every non implemented question mark node`n`nRead the readme.txt file for more info on how to properly test this script")
+start.Add("Text", "vText1", "Mirror Dungeon Script v0.2 a.k.a. Vroom-vroom Machine by KhryDL#2396`n`nThis script is theoretically capable of automatically clearing all the dungeon up untill the last boss`n`nRead the readme.txt file for more info on how to properly test this script")
 start.Add("Button", "Default", "Start").OnEvent("Click", runData)
 
 tab1.UseTab(2)
