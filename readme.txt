@@ -1,4 +1,4 @@
-Mirror Dungeon Script v0.1 a.k.a. Vroom-vroom Machine by KhryDL#2396
+Mirror Dungeon Script v0.2 a.k.a. Vroom-vroom Machine by KhryDL#2396
 
 This script is theoretically capable of automatically clearing all the dungeon up to the last boss (excluded)
 
@@ -34,14 +34,13 @@ MESSAGE BOXES
 	The script will pause and open a message box in the following occasions, DON'T JUST PRESS ENTER but read what the box says to prevent issues and help me finish the script:
 		When a "question mark" node is entered:
 			I haven't implemented all abnormalities events as the way the script is set up requires me to extract part of the starting abnormality screen from an in game image
-			What to do: Press enter, if the script recognizes the abnormality press enter again, if if doesn't or it gets stuck for more than 5 seconds take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)
+			What to do: Press enter, if the script recognizes the abnormality press enter again, if it doesn't or it gets stuck for more than 5 seconds take a screenshot of the entire screen and put it inside a folder (named after the abnormality or the ego gift it rewards) in https://drive.google.com/drive/folders/1-4nZqkWHOtfIhDMdvLGjT2CoMChdGJHU (as a png).
+			In the same folder put a text file that describes teh steps you have to perform in order to complete the event in the best way possible (refer to this https://docs.google.com/spreadsheets/d/14qQvQ-vpMbJYLNHA32VMqgWgvgVRIhq-ceB_SS6Ieao), using a format similar to this: press skip, press first option, press skip, roll dice, press skip, press skip, press continue
 
 		When the next node is the last boss node:
 			This is actually how the script is intended to work
-			If it happens before the final boss node take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)
+			If it happens before the final boss node take a screenshot of the entire screen, create an issue here on GitHub containing the screenshot (as a png) and a description of the bug (a video is fine too, but the screenshot is required)
 
 		When something goes wrong:
 			If the script fails to scan the screen for the next thing to do
-			What to do: Reload and start the script, if it gets stuck again take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)
-	
-	Every message box will contain all the necessary informations to help improve the script (mostly just taking a screenshot)
+			What to do: Reload and start the script, if it gets stuck again take a screenshot of the entire screen, create an issue here on GitHub containing the screenshot (as a png) and a description of the bug (a video is fine too, but the screenshot is required)
