@@ -2,7 +2,7 @@
 #include "tooltip.ahk"
 SendMode "Event"
 
-abnos := ["vending", "surgery", "sheep", "mirror", "spider"]
+abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "teddy", "blue", "centipede"]
 abnos1 := ["purpleGirl", "candle", "bull"]
 abnos2 := ["ash"]
 abnos3 := ["god", "passenger"]
@@ -12,12 +12,15 @@ bx := 1030
 ay := 180
 by := 720
 cy := 360
+debug := false
 
 +s::
 {
 	load := 0
 	battle := 0
-	
+	/*if WinActive("ahk_exe LimbusCompany.exe")
+		WinMove -8, -31, 1920+16, 1080+39, "ahk_exe LimbusCompany.exe"
+		*/
 	out:
 	Loop {
 		if WinActive("ahk_exe LimbusCompany.exe") {
@@ -63,7 +66,8 @@ cy := 360
 
 			;select sinner
 			else if ImageSearch(&X, &Y, 1620, 860, 1760, 880, "*10 " A_WorkingDir "\Images\sinner.png") {
-				;MsgBox "sinner"
+				if debug
+					MsgBox "sinner selection"
 				Loop 12 {
 					a := StrSplit(IniRead(A_ScriptDir "\Data\sinners.ini", A_Index), "=")
 					switch a[1] {
@@ -112,7 +116,7 @@ cy := 360
 
 			;select ego gift
 			Else if ImageSearch(&X, &Y, 1600, 850, 1820, 885, "*20 *Transblack " A_WorkingDir "\Images\gift.png") {
-				MsgBox "I haven't implemented all ego gifts yet as the way the script is set up requires me to extract the ego gift name from an in game image`nWhat to do: `nIf one of the gifts is:`nIllusory Hunt`nCarmilla`nStandard-duty Battery`nGrimy Iron Stake`nHellterfly’s Dream `ntake a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)`notherwise press enter"
+				MsgBox "I haven't implemented all ego gifts yet as the way the script is set up requires me to extract the ego gift name from an in game image`nWhat to do: `nIf one of the gifts is:`nIllusory Hunt`ntake a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)`notherwise press enter"
 				selectGift()
 				Sleep 500
 				Click X ,Y
@@ -121,7 +125,8 @@ cy := 360
 
 			;start battle
 			else if ImageSearch(&X, &Y, 1610, 710, 1730, 740, "*10 " A_WorkingDir "\Images\team.png") {
-				;MsgBox "team"
+				if debug
+					MsgBox "team selection"
 				startBattle()
 				Sleep 1500
 			}
@@ -150,7 +155,8 @@ cy := 360
 			;upgrade characters
 			else if ImageSearch(&stageX, &stageY, 480, 405, 1420, 430, "*130 *TransBlack " A_WorkingDir "\Images\stage2.png") || ImageSearch(&stageX, &stageY, 480, 405, 1420, 430, "*130 *TransBlack " A_WorkingDir "\Images\stage3.png") || ImageSearch(&stageX, &stageY, 480, 405, 1420, 430, "*100 *TransBlack " A_WorkingDir "\Images\stage4.png") || ImageSearch(&stageX, &stageY, 480, 405, 1420, 430, "*130 *TransBlack " A_WorkingDir "\Images\stage5.png") {
 				;MouseMove stageX, stageY
-				;MsgBox "stage " stageX "x" stageY
+				if debug
+					MsgBox "character upgrade"
 				Click stageX, stageY + 50
 				Sleep 500
 				Click 1200, 800
@@ -173,25 +179,25 @@ cy := 360
 			}
 
 			;align dante to center
-			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY > by {
+			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY > 500 {
 				MouseMove danteX, danteY
 				MouseClickDrag "Left", 0, 0, 0, - 400, 10, "r"
 			}
-			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY < cy {
+			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY < 450 {
 				MouseMove danteX, danteY
 				MouseClickDrag "Left", 0, 0, 0, 400, 10, "r"
 			}
-			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > bx {
+			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > 895 {
 				MouseMove danteX, danteY
 				MouseClickDrag "Left", 0, 0, 960 - danteX - 50, 0, 10, "r"
 			}
-			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX < ax {
+			Else if ImageSearch(&danteX, &danteY, 0, 0, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX < 1025 {
 				MouseMove danteX, danteY
 				MouseClickDrag "Left", 0, 0, 960 - danteX + 50, 0, 10, "r"
 			}
 
 			;press confirm
-			else if ImageSearch(&ConfirmX, &ConfirmY, 930, 780, 1060, 820, "*10 " A_WorkingDir "\Images\confirm1.png") {
+			else if ImageSearch(&ConfirmX, &ConfirmY, 920, 780, 1060, 820, "*20 " A_WorkingDir "\Images\confirm1.png") {
 				Click ConfirmX, ConfirmY
 				Loop 5 {
 					MouseClick "WheelDown",,,1
@@ -215,11 +221,15 @@ cy := 360
 
 			;orange node
 			else if bossNow(2) && (ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png")) {
-					;MouseMove nodeX, nodeY
-					;MsgBox nodeX, nodeY
+					MouseMove nodeX, nodeY
+					if debug
+						MsgBox "node found"
 					node(nodeX, nodeY)
 			}
 			else if ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png")
+					MouseMove nodeX, nodeY
+					if debug
+						MsgBox "node found"
 					node(nodeX, nodeY)
 			
 			;end loop
@@ -402,7 +412,8 @@ selectGift() {
 	;gifts are 210x30 starting from y 280 x 440 860 1275
 	Loop Read "gifts.txt" {
 		if ImageSearch(&giftX, &giftY, 360, 270, 1550, 320, "*20 " A_WorkingDir "\Gifts\" A_LoopReadLine ".png") {
-			;MsgBox A_LoopReadLine
+			if debug
+				MsgBox A_LoopReadLine
 			Click giftX + 105, 420
 			Break
 		}
@@ -451,6 +462,11 @@ startBattle() {
 {
 	Run "start.exe"
 	ExitApp
+}
+
++d::{
+	Global
+	debug := !debug
 }
 +r::Reload
 +d::bossUp()

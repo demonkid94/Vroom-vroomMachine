@@ -7,7 +7,7 @@ showTooltip(boss)
 
 showTooltip(b) {
 	Gui().Opt("+OwnDialogs")
-	Tooltip("Floor: " b "    SHIFT + S: Start script    SHIFT + R: Reload script    SHIFT + B: Floor+1    ALT + S: Suspend hotkeys    SHIFT + X: Exit script", 10, 5)
+	Tooltip("Floor: " b "    SHIFT + S: Start script    SHIFT + R: Reload script    SHIFT + B: Floor+1    SHIFT + D: Debug mode    ALT + S: Suspend hotkeys    SHIFT + X: Exit script", 10, 5)
 }
 
 +b::

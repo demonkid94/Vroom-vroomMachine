@@ -40,10 +40,6 @@ MESSAGE BOXES
 			What to do: 
 				If one of the gifts is:
 					Illusory Hunt
-					Carmilla
-					Standard-duty Battery
-					Grimy Iron Stake
-					Hellterfly’s Dream 
 				take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)
 				otherwise press enter
 
