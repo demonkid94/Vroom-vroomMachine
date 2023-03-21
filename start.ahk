@@ -1,5 +1,7 @@
 ;@Ahk2Exe-AddResource main.ahk, main.ahk
-
+if !FileExist("Data")
+	DirCreate "Data"	
+	
 If !FileExist(A_ScriptDir "\Data\sinners.ini") {
 	for n in array("YiSang", "Faust", "Don", "Ryoshu", "Mersault", "HongLu", "Heathcliff", "Ishmael", "Rodion", "Sinclair", "Outis", "Gregor") {
 		IniWrite("0", A_ScriptDir "\Data\sinners.ini", A_Index, n)
@@ -7,8 +9,8 @@ If !FileExist(A_ScriptDir "\Data\sinners.ini") {
 }
 
 If !FileExist(A_ScriptDir "\Data\gifts.ini") {
-	g := ["Blood, Sweat, and Tears", "Bloody Gadget", "Blue Zippo Lighter", "Carmilla", "Child within a Flask", "Coffee and Cranes", "Crown of Roses", "Eclipse of Scarlet Moths", "Fiery Down", "Gathering Skulls", "Green Spirit", "Grey Coat", "Grimy Iron Stake", "Hellterfly's Dream", "Homeward", "Illusory Hunt", "Late-bloomer's Tattoo", "Lithograph", "Little and To-be-Naughty Plushie", "Lowest Star", "Melty Eyeball", "Nixie Divergence", "Perversion", "Phantom Pain", "Phlebotomy Pack", "Pinpoint Logic Circuit", "Prejudice", "Rusty Commemorative Coin", "Standard-duty Battery", "Sticky Muck", "Sunshower", "Talisman Bundle", "Thunderbranch", "Today's Expression", "Tomorrow's Fortune", "Voodoo Doll", "White Gossypium", "Wound Clerid"]
-	for n in array("bloodSweatAndTears", "bloodyGadget", "blueZippoLighter", "carmilla", "childWithinAFlask", "coffeeAndCranes", "crownOfRoses", "eclipseOfScarletMoths", "fieryDown", "gatheringSkulls", "greenSpirit", "greyCoat", "grimyIronStake", "hellterflysDream", "homeward", "illusoryHunt", "lateBloomersTattoo", "lithograph", "littleAndToBeNaughtyPlushie", "lowestStar", "meltyEyeball", "nixieDivergence", "perversion", "phantomPain", "phlebotomyPack", "pinpointLogicCircuit", "prejudice", "rustyCommemorativeCoin", "standardDutyBattery", "stickyMuck", "sunshower", "talismanBundle", "thunderbranch", "todaysExpression", "tomorrowsFortune", "voodooDoll", "whiteGossypium", "woundClerid") {
+	g := ["Blood, Sweat, and Tears", "Bloody Gadget", "Blue Zippo Lighter", "Carmilla", "Child within a Flask", "Coffee and Cranes", "Crown of Roses", "Dreaming Electric Sheep", "Eclipse of Scarlet Moths", "Fiery Down", "Gathering Skulls", "Green Spirit", "Grey Coat", "Grimy Iron Stake", "Hellterfly's Dream", "Homeward", "Illusory Hunt", "Late-bloomer's Tattoo", "Lithograph", "Little and To-be-Naughty Plushie", "Lowest Star", "Melty Eyeball", "Nixie Divergence", "Perversion", "Phantom Pain", "Phlebotomy Pack", "Pinpoint Logic Circuit", "Prejudice", "Rusty Commemorative Coin", "Standard-duty Battery", "Sticky Muck", "Sunshower", "Talisman Bundle", "Thunderbranch", "Today's Expression", "Tomorrow's Fortune", "Voodoo Doll", "White Gossypium", "Wound Clerid"]
+	for n in array("bloodSweatAndTears", "bloodyGadget", "blueZippoLighter", "carmilla", "childWithinAFlask", "coffeeAndCranes", "crownOfRoses", "dreamingElectricSheep", "eclipseOfScarletMoths", "fieryDown", "gatheringSkulls", "greenSpirit", "greyCoat", "grimyIronStake", "hellterflysDream", "homeward", "illusoryHunt", "lateBloomersTattoo", "lithograph", "littleAndToBeNaughtyPlushie", "lowestStar", "meltyEyeball", "nixieDivergence", "perversion", "phantomPain", "phlebotomyPack", "pinpointLogicCircuit", "prejudice", "rustyCommemorativeCoin", "standardDutyBattery", "stickyMuck", "sunshower", "talismanBundle", "thunderbranch", "todaysExpression", "tomorrowsFortune", "voodooDoll", "whiteGossypium", "woundClerid") {
 		IniWrite(g[A_Index], A_ScriptDir "\Data\gifts.ini", A_Index, n)
 	}
 	g:= []
@@ -24,7 +26,8 @@ Loop 12 {
 
 gifts := []
 giftsD := []
-Loop 38 {
+l := StrSplit(IniRead(A_ScriptDir "\Data\gifts.ini"), "`n").length
+Loop l {
 	a := StrSplit(IniRead(A_ScriptDir "\Data\gifts.ini", A_Index), "=")
 	gifts.push(a[2])
 	giftsD.push(a[1])
@@ -54,28 +57,24 @@ start.addbutton("ys-100 x+10 w100 h100", "Save Changes").OnEvent("Click", saveSi
 
 tab1.UseTab(3)
 start.addtext("Section w200", "Gift")
-start.addtext("ys w50", "Pick Order")
+start.addtext("ys w50 vOrder1", "Pick Order")
 
 For g in gifts {
-	if A_Index < 20 {
+	if A_Index > 1 && Mod(A_Index, 20) == 1 {
+		start["Order" A_Index - 20].GetPos(&x, &y)
+		start.addtext("y" y " x" x + 150 " Section w200", "Gift")
+		start.addtext("ys w50 vOrder" A_Index, "Pick Order")
+	}
 		start.addtext("xs section w200 vGift" A_index, g)
 		start.addtext("ys hidden w0 vGiftD" A_index, giftsD[A_Index])
 		start.addtext("ys w30 vGRow" A_index, A_index)
-		start.addbutton("ys vGUp" A_index, "Up").OnEvent("Click", moveUpG.Bind(A_index))
-		start.addbutton("ys vGDown" A_index, "Down").OnEvent("Click", moveDownG.Bind(A_index))
-	}
-	Else {
-		start["GDown" A_Index - 19].GetPos(&x, &y)
-		start.addtext("y" y " x" x + 50 " section w200 vGift" A_index, g)
-		start.addtext("ys section hidden w0 vGiftD" A_index, giftsD[A_Index])
-		start.addtext("ys w30 vGRow" A_index, A_index)
-		start.addbutton("ys vGUp" A_index, "Up").OnEvent("Click", moveUpG.Bind(A_index))
-		start.addbutton("ys vGDown" A_index, "Down").OnEvent("Click", moveDownG.Bind(A_index))
-		
-	}
-}
+		start.addbutton("ys-5 vGUp" A_index, "Up").OnEvent("Click", moveUpG.Bind(A_index))
+		start.addbutton("ys-5 vGDown" A_index, "Down").OnEvent("Click", moveDownG.Bind(A_index))
 
-start.addbutton("ys-100 x+10 w100 h100", "Save Changes").OnEvent("Click", saveGifts)
+}
+start["Gift21"].GetPos(&x, )
+start["Gift17"].GetPos(, &y)
+start.addbutton("y" y " x" x * Ceil(l / 20) " w100 h100", "Save Changes").OnEvent("Click", saveGifts)
 
 start.Show()
 
