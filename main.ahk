@@ -2,10 +2,10 @@
 #include "tooltip.ahk"
 SendMode "Event"
 
-abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "teddy", "blue", "centipede"]
+abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "blue", "centipede"]
 abnos1 := ["purpleGirl", "candle", "bull"]
 abnos2 := ["ash"]
-abnos3 := ["god", "passenger"]
+abnos3 := ["god", "passenger", "teddy"]
 
 ax := 890
 bx := 1030
@@ -181,17 +181,17 @@ debug := false
 			;align dante to center
 			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY > 500 {
 				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 0, - 400, 10, "r"
+				MouseClickDrag "Left", 0, 0, 0, - 200, 10, "r"
 			}
 			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY < 450 {
 				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 0, 400, 10, "r"
+				MouseClickDrag "Left", 0, 0, 0, 200, 10, "r"
 			}
-			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > 895 {
+			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > 1025 {
 				MouseMove danteX, danteY
 				MouseClickDrag "Left", 0, 0, 960 - danteX - 50, 0, 10, "r"
 			}
-			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX < 1025 {
+			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX < 895 {
 				MouseMove danteX, danteY
 				MouseClickDrag "Left", 0, 0, 960 - danteX + 50, 0, 10, "r"
 			}
@@ -221,17 +221,17 @@ debug := false
 
 			;orange node
 			else if bossNow(2) && (ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png")) {
-					MouseMove nodeX, nodeY
-					if debug
-						MsgBox "node found"
-					node(nodeX, nodeY)
+				MouseMove nodeX, nodeY
+				if debug
+					MsgBox "node found"
+				node(nodeX, nodeY)
 			}
-			else if ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png")
-					MouseMove nodeX, nodeY
-					if debug
-						MsgBox "node found"
-					node(nodeX, nodeY)
-			
+			else if ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png") {
+				MouseMove nodeX, nodeY
+				if debug
+					MsgBox "node found"
+				node(nodeX, nodeY)
+			}
 			;end loop
 			Else {
 				MsgBox "A bug occurred that prevented the script from knowing what to do next`nWhat to do: Reload and start the script, if it gets stuck again take a screenshot of the entire screen and sent it to KhryDL#2396 (as a png)"
@@ -410,10 +410,11 @@ gossypium() {
 
 selectGift() {
 	;gifts are 210x30 starting from y 280 x 440 860 1275
-	Loop Read "gifts.txt" {
-		if ImageSearch(&giftX, &giftY, 360, 270, 1550, 320, "*20 " A_WorkingDir "\Gifts\" A_LoopReadLine ".png") {
+	Loop {
+		a := StrSplit(IniRead(A_ScriptDir "\Data\gifts.ini", A_Index), "=")
+		if ImageSearch(&giftX, &giftY, 360, 270, 1550, 320, "*20 " A_WorkingDir "\Gifts\" a[1] ".png") {
 			if debug
-				MsgBox A_LoopReadLine
+				MsgBox a[1]
 			Click giftX + 105, 420
 			Break
 		}
@@ -469,7 +470,6 @@ startBattle() {
 	debug := !debug
 }
 +r::Reload
-+d::bossUp()
 
 #SuspendExempt
 !s::Suspend
