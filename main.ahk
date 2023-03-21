@@ -2,10 +2,10 @@
 #include "tooltip.ahk"
 SendMode "Event"
 
-abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "blue", "centipede"]
+abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "blue", "centipede", "talismans"]
 abnos1 := ["purpleGirl", "candle", "bull"]
 abnos2 := ["ash"]
-abnos3 := ["god", "passenger", "teddy"]
+abnos3 := ["god", "passenger", "teddy", "steampunkRobot"]
 
 ax := 890
 bx := 1030
