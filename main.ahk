@@ -5,7 +5,7 @@ SendMode "Event"
 abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "blue", "centipede", "talismans"]
 abnos1 := ["purpleGirl", "candle", "bull"]
 abnos2 := ["ash"]
-abnos3 := ["god", "passenger", "teddy", "steampunkRobot"]
+abnos3 := ["god", "passenger", "teddy", "steampunkRobot", "gossypium"]
 
 ax := 890
 bx := 1030
@@ -323,23 +323,6 @@ event() {
 				break abnoLoop
 			}
 		}
-		if ImageSearch(&X, &Y, boxX, boxY, boxXX, boxYY, "*100 *TransBlack " A_WorkingDir "\Abnos\gossypium.png") {
-				;MouseMove X, Y
-				MsgBox "gossypium"
-				Click 900, 460	;skip
-				Sleep 1500
-				Click 1440, 330	;first option
-				Sleep 1500
-				Click 1700, 970	;continue
-				Sleep 1500
-				gossypium()
-				Click 900, 460
-				Sleep 500
-				Click
-				Sleep 500
-				Click
-				break abnoLoop
-		}
 	}
 }
 
@@ -364,38 +347,6 @@ diceCheck() {
 			MsgBox "Check if the script selects the right sinner"
 			Click diceX, diceY
 		Case PixelSearch(&diceX, &diceY, 70, 898, 970, 923, 0xd30000):
-			MouseMove diceX, diceY
-			MsgBox "Check if the script selects the right sinner"
-			Click diceX, diceY
-		default:
-			MsgBox "roll failed"
-	}
-	Sleep 500
-	Click 1700, 960
-	Sleep 5000
-}
-
-gossypium() {
-	Click
-	Sleep 2000
-	Switch {
-		Case PixelSearch(&diceX, &diceY, 70, 898, 970, 923, 0xd30000):
-			MouseMove diceX, diceY
-			MsgBox "Check if the script selects the right sinner"
-			Click diceX, diceY
-		Case PixelSearch(&diceX, &diceY, 70, 898, 970, 923, 0xfd3333):
-			MouseMove diceX, diceY
-			MsgBox "Check if the script selects the right sinner"
-			Click diceX, diceY
-		Case PixelSearch(&diceX, &diceY, 70, 898, 970, 923, 0xe9c99f):
-			MouseMove diceX, diceY
-			MsgBox "Check if the script selects the right sinner"
-			Click diceX, diceY
-		Case PixelSearch(&diceX, &diceY, 70, 898, 970, 923, 0xddb95a, 10):
-			MouseMove diceX, diceY
-			MsgBox "Check if the script selects the right sinner"
-			Click diceX, diceY
-		Case PixelSearch(&diceX, &diceY, 70, 898, 970, 923, 0xf7c100):
 			MouseMove diceX, diceY
 			MsgBox "Check if the script selects the right sinner"
 			Click diceX, diceY
