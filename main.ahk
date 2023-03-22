@@ -218,14 +218,14 @@ debug := false
 				node(nodeX, nodeY)
 			}
 
-			;orange node
+			;normal node
 			else if bossNow(2) && (ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, 0, 0, ax, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png")) {
 				MouseMove nodeX, nodeY
 				if debug
 					MsgBox "node found"
 				node(nodeX, nodeY)
 			}
-			else if ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png") {
+			else if !bossNow(2) && ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*2 *TransBlack " A_WorkingDir "\Images\sword.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, A_WorkingDir "\Images\abno.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 " A_WorkingDir "\Images\event.png") || ImageSearch(&nodeX, &nodeY, bx, 0, 1920, 1080, "*10 *TransBlack " A_WorkingDir "\Images\2sword.png") {
 				MouseMove nodeX, nodeY
 				if debug
 					MsgBox "node found"
