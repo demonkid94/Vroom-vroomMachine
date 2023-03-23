@@ -2,9 +2,9 @@
 #include "tooltip.ahk"
 SendMode "Event"
 
-abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "blue", "centipede", "talismans"]
-abnos1 := ["purpleGirl", "candle", "bull"]
-abnos2 := ["ash"]
+abnos := ["vending", "surgery", "sheep", "mirror", "spider", "slender", "blue", "centipede", "talismans", "eyeMonster", "greyCoat"]
+abnos1 := ["purpleGirl", "candle", "bull", "greenSpirit", "scarletMoths"]
+abnos2 := ["ash", "perversion"]
 abnos3 := ["god", "passenger", "teddy", "steampunkRobot", "gossypium"]
 
 ax := 890
@@ -38,18 +38,14 @@ debug := false
 			else if ImageSearch(&X, &Y, 1748, 39, 1791, 87, "*45 " A_WorkingDir "\Images\pause.png"){
 				;MsgBox "pause"
 				battle := 10
-					Click
-					Sleep 500
-					Click
-					Sleep 500
 			}
 			else if ImageSearch(&X, &Y, 1830, 120, 1870, 160, "*21 " A_WorkingDir "\Images\target.png") {
 				;MsgBox "target"
 				battle := 10
-					Click
-					Sleep 500
-					Click
-					Sleep 500
+				Click
+				Sleep 500
+				Click
+				Sleep 500
 
 				;press "WIN RATE"
 				if ImageSearch(&winX, &winY, 1210, 780, 1920, 850, "*110 " A_WorkingDir "\Images\win.png") {
@@ -116,6 +112,8 @@ debug := false
 
 			;select ego gift
 			Else if ImageSearch(&X, &Y, 1600, 850, 1820, 885, "*20 *Transblack " A_WorkingDir "\Images\gift.png") {
+				if debug
+					MsgBox "ego gift selection"
 				selectGift()
 				Sleep 500
 				Click X ,Y
@@ -177,24 +175,6 @@ debug := false
 				}
 			}
 
-			;align dante to center
-			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY > 500 {
-				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 0, 540 - danteY - 50, 10, "r"
-			}
-			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY < 450 {
-				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 0, 540 - danteY + 50, 10, "r"
-			}
-			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > 1025 {
-				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 960 - danteX - 50, 0, 10, "r"
-			}
-			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX < 895 {
-				MouseMove danteX, danteY
-				MouseClickDrag "Left", 0, 0, 960 - danteX + 50, 0, 10, "r"
-			}
-
 			;press confirm
 			else if ImageSearch(&ConfirmX, &ConfirmY, 920, 780, 1060, 820, "*20 " A_WorkingDir "\Images\confirm1.png") {
 				Click ConfirmX, ConfirmY
@@ -207,8 +187,26 @@ debug := false
 				}
 			}
 
-			;boss node			changed boss3 from *15 to *7
-			else if ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*5 *TransBlack " A_WorkingDir "\Images\boss.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*TransBlack " A_WorkingDir "\Images\boss1.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*8 *TransBlack " A_WorkingDir "\Images\boss2.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*11 *TransBlack " A_WorkingDir "\Images\boss3.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*TransBlack " A_WorkingDir "\Images\boss4.png") {
+			;align dante to center
+			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY > 466 {
+				MouseMove danteX, danteY
+				MouseClickDrag "Left", 0, 0, 0, 466 - danteY - 50, 10, "r"
+			}
+			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteY < 406 {
+				MouseMove danteX, danteY
+				MouseClickDrag "Left", 0, 0, 0, 406 - danteY + 50, 10, "r"
+			}
+			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX > 983 {
+				MouseMove danteX, danteY
+				MouseClickDrag "Left", 0, 0, 983 - danteX - 50, 0, 10, "r"
+			}
+			Else if ImageSearch(&danteX, &danteY, 0, 122, 1920, 1080, "*20 " A_WorkingDir "\Images\dante.png") && danteX < 923 {
+				MouseMove danteX, danteY
+				MouseClickDrag "Left", 0, 0, 923 - danteX + 50, 0, 10, "r"
+			}
+
+			;boss node
+			else if ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*5 *TransBlack " A_WorkingDir "\Images\boss.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*TransBlack " A_WorkingDir "\Images\boss1.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*7 *TransBlack " A_WorkingDir "\Images\boss2.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*11 *TransBlack " A_WorkingDir "\Images\boss3.png") || ImageSearch(&nodeX, &nodeY, 0, ay, 1920, 1080, "*TransBlack " A_WorkingDir "\Images\boss4.png") {
 				MouseMove nodeX, nodeY
 				if bossNow(3) {
 					MsgBox "If the mouse isn't pointing at the boss node of the 3rd floor take a screenshot of the entire screen, create an issue here https://github.com/KhryDL/Vroom-vroomMachine/issues containing the screenshot (as a png) and a description of the bug (a video is fine too, but the screenshot is required)"
@@ -238,8 +236,6 @@ debug := false
 			}
 			Sleep 500
 		}
-		else
-			BlockInput "MouseMoveOff"
 	}
 }
 
@@ -259,13 +255,10 @@ event() {
 				Sleep 1500
 				Click 1440, 330	;first option
 				Sleep 1500
-				Click 900, 460
-				Sleep 500
-				Click
-				Sleep 500
-				Click
-				Sleep 500
-				Click
+				Loop 5 {
+					Click 900, 460
+					Sleep 500
+				}
 				break abnoLoop
 			}
 		}
@@ -277,11 +270,10 @@ event() {
 				Sleep 1500
 				Click 1440, 460	;second option
 				Sleep 1500
-				Click 900, 460
-				Sleep 500
-				Click
-				Sleep 500
-				Click
+				Loop 5 {
+					Click 900, 460
+					Sleep 500
+				}
 				break abnoLoop
 			}
 		}
@@ -295,12 +287,13 @@ event() {
 				Sleep 1500
 				Click 900, 460
 				Sleep 1500
+				Click 1700, 970	;continue
+				Sleep 1500
 				diceCheck()
-				Click 900, 460
-				Sleep 500
-				Click
-				Sleep 500
-				Click
+				Loop 5 {
+					Click 900, 460
+					Sleep 500
+				}
 				break abnoLoop
 			}
 		}
@@ -312,14 +305,15 @@ event() {
 				Sleep 1500
 				Click 1440, 330	;first option
 				Sleep 1500
+				Click 900, 460
+				Sleep 1500
 				Click 1700, 970	;continue
 				Sleep 1500
 				diceCheck()
-				Click 900, 460
-				Sleep 500
-				Click
-				Sleep 500
-				Click
+				Loop 5 {
+					Click 900, 460
+					Sleep 500
+				}
 				break abnoLoop
 			}
 		}
@@ -360,9 +354,9 @@ diceCheck() {
 
 selectGift() {
 	;gifts are 210x30 starting from y 280 x 440 860 1275
-	Loop {
-		a := StrSplit(IniRead(A_ScriptDir "\Data\gifts.ini", A_Index), "=")
-		if ImageSearch(&giftX, &giftY, 360, 270, 1550, 320, "*20 " A_WorkingDir "\Gifts\" a[1] ".png") {
+	for g in strsplit(IniRead(A_ScriptDir "\Data\gifts.ini", "Gifts1"), "`n") {
+		a := StrSplit(g, "=")
+		if ImageSearch(&giftX, &giftY, 360, 270, 1550, 320, "*80 " A_WorkingDir "\Gifts\" a[1] ".png") {
 			if debug
 				MsgBox a[1]
 			Click giftX + 105, 420
