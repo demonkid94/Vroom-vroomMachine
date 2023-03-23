@@ -75,7 +75,7 @@ debug := false
 							Click 850, 390
 						case "Ryoshu":
 							click 1080, 390
-						case "Meursault":
+						case "Mersault":
 							click 1290, 390
 						case "HongLu":
 							click 1520, 390

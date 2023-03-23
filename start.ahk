@@ -3,8 +3,8 @@ if !FileExist("Data")
 	DirCreate "Data"	
 	
 If !FileExist(A_ScriptDir "\Data\sinners.ini") {
-	for n in array("YiSang", "Faust", "Don", "Ryoshu", "Meursault", "HongLu", "Heathcliff", "Ishmael", "Rodion", "Sinclair", "Outis", "Gregor") {
-		IniWrite("LCBSinner", A_ScriptDir "\Data\sinners.ini", A_Index, n)
+	for n in array("YiSang", "Faust", "Don", "Ryoshu", "Mersault", "HongLu", "Heathcliff", "Ishmael", "Rodion", "Sinclair", "Outis", "Gregor") {
+		IniWrite("0", A_ScriptDir "\Data\sinners.ini", A_Index, n)
 	}
 }
 
@@ -22,11 +22,11 @@ If !FileExist(A_ScriptDir "\Data\gifts.ini") || (StrSplit(IniRead(A_ScriptDir "\
 }
 
 sinners := []
-sinnersId := []
+sinnersR := []
 Loop 12 {
 	a := StrSplit(IniRead(A_ScriptDir "\Data\sinners.ini", A_Index), "=")
 	sinners.push(a[1])
-	sinnersId.push(a[2])
+	sinnersR.push(a[2])
 }
 
 gifts := []
@@ -45,23 +45,14 @@ start.Add("Text", "vText1", "Mirror Dungeon Script v0.2 a.k.a. Vroom-vroom Machi
 start.Add("Button", "Default", "Start").OnEvent("Click", runData)
 
 tab1.UseTab(2)
-start.addtext("Section w100", "Sinner")
-start.addtext("ys w100", "Identity")
+start.addtext("Section w70", "Sinner")
+start.addtext("ys w50", "Rank")
 start.addtext("ys w50", "Pick Order")
 
 For s in sinners {
-	start.addtext("xs section w100 vSinner" A_index, s)
-	db := start.AddListBox("ys vIdListBox" a_index)
-	start.AddDropDownList("ys w150 vIdList" a_index).OnEvent("Change", identitySelect.bind(A_index))
-	n := a_index
-	for i in strsplit(IniRead(A_ScriptDir "\Data\identities.ini", s), "`n") {
-		a := strsplit(i, "=")
-		db.add([a[1]])
-		start["IdList" n].add([a[2]])
-	}
-	start["IdList" a_index].text := IniRead(A_ScriptDir "\Data\identities.ini", s, sinnersId[A_index])
-	db.text := sinnersId[A_index]
-	start.addtext("ys w50 vSRow" A_index, A_index)
+	start.addtext("xs section w70 vSinner" A_index, s)
+	start.addtext("ys w50 vRarity" A_index, sinnersR[A_index])
+	start.addtext("ys w30 vSRow" A_index, A_index)
 	start.addbutton("ys vUp" A_index, "Up").OnEvent("Click", moveUp.Bind(A_index))
 	start.addbutton("ys vDown" A_index, "Down").OnEvent("Click", moveDown.Bind(A_index))
 }
@@ -101,28 +92,11 @@ moveUp(row, *) {
 		Return
 	Else {
 		sinner := start["Sinner" row].text
+		rarity := start["Rarity" row].text
 		start["Sinner" row].text := start["Sinner" row - 1].text
+		start["Rarity" row].text := start["Rarity" row - 1].text
 		start["Sinner" row - 1].text := sinner
-		c := start["IdList" row].value
-		cc := start["IdList" row - 1].value
-		start["IdListBox" row].delete()
-		start["IdList" row].delete()
-		for i in strsplit(IniRead(A_ScriptDir "\Data\identities.ini", start["Sinner" row].text), "`n") {
-			a := strsplit(i, "=")
-			start["IdListBox" row].add([a[1]])
-			start["IdList" row].add([a[2]])
-		}
-		start["IdList" row].Choose(cc)
-		start["IdListBox" row - 1].delete()
-		start["IdList" row - 1].delete()
-		for i in strsplit(IniRead(A_ScriptDir "\Data\identities.ini", start["Sinner" row - 1].text), "`n") {
-			a := strsplit(i, "=")
-			start["IdListBox" row - 1].add([a[1]])
-			start["IdList" row - 1].add([a[2]])
-		}
-		start["IdList" row - 1].Choose(c)
-		identitySelect(row)
-		identitySelect(row - 1)
+		start["Rarity" row - 1].text := rarity
 	}
 }
 
@@ -131,35 +105,18 @@ moveDown(row, *) {
 		Return
 	Else {
 		sinner := start["Sinner" row].text
+		rarity := start["Rarity" row].text
 		start["Sinner" row].text := start["Sinner" row + 1].text
-		start["Sinner" row + 1].text := sinner
-		c := start["IdList" row].value
-		cc := start["IdList" row + 1].value
-		start["IdListBox" row].delete()
-		start["IdList" row].delete()
-		for i in strsplit(IniRead(A_ScriptDir "\Data\identities.ini", start["Sinner" row].text), "`n") {
-			a := strsplit(i, "=")
-			start["IdListBox" row].add([a[1]])
-			start["IdList" row].add([a[2]])
-		}
-		start["IdList" row].Choose(cc)
-		start["IdListBox" row + 1].delete()
-		start["IdList" row + 1].delete()
-		for i in strsplit(IniRead(A_ScriptDir "\Data\identities.ini", start["Sinner" row + 1].text), "`n") {
-			a := strsplit(i, "=")
-			start["IdListBox" row + 1].add([a[1]])
-			start["IdList" row + 1].add([a[2]])
-		}
-		start["IdList" row + 1].Choose(c)
-		identitySelect(row)
-		identitySelect(row + 1)
+		start["Rarity" row].text := start["Rarity" row + 1].text
+		start["Sinner" row - 1].text := sinner
+		start["Rarity" row - 1].text := rarity
 	}
 }
 
 saveSinners(*) {	
 	Loop 12 {
 		IniDelete(A_ScriptDir "\Data\sinners.ini", A_Index)
-		IniWrite(start["IdListBox" A_Index].text, A_ScriptDir "\Data\sinners.ini", A_Index, start["Sinner" A_Index].text)
+		IniWrite(start["Rarity" A_Index].text, A_ScriptDir "\Data\sinners.ini", A_Index, start["Sinner" A_Index].text)
 	}
 }
 
@@ -194,8 +151,4 @@ saveGifts(*) {
 	Loop giftsData.length {
 		IniWrite(start["GiftName" A_Index].text, A_ScriptDir "\Data\gifts.ini", "Gifts1", start["Gift" A_Index].text)
 	}
-}
-
-identitySelect(row, *) {
-	start["IdListBox" row].Choose(start["IdList" row].value)
 }
